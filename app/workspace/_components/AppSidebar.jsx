@@ -44,11 +44,11 @@ const SiderBarOptions = [
         icon: PencilRulerIcon,
         path: '/workspace/ai-tools'
     },
-    {
-        title: 'Billing',
-        icon: WalletCards,
-        path: '/workspace/billing'
-    },
+    // {
+    //     title: 'Billing',
+    //     icon: WalletCards,
+    //     path: '/workspace/billing'
+    // },
     {
         title: 'Profile',
         icon: UserCircle2Icon,
