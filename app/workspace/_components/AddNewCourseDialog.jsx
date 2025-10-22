@@ -54,10 +54,10 @@ const AddNewCourseDialog = ({ children }) => {
                 ...formData,
                 courseId: courseId
             });
-            if (result.data.resp == 'Limit Exceeded') {
-                toast.warning('Please Subscribe to Plan!');
-                router.push('/workspace/billing');
-            }
+            // if (result.data.resp == 'Limit Exceeded') {
+            //     toast.warning('Please Subscribe to Plan!');
+            //     router.push('/workspace/billing');
+            // }
             setLoading(false);
             toast.success("Course Generated Successfully !!")
             router.push('/workspace/edit-course/' + result.data?.courseId);

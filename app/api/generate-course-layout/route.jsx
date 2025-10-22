@@ -1,11 +1,11 @@
 import { db } from '@/config/db';
 import { coursesTable } from '@/config/schema';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import {
     GoogleGenAI,
 } from '@google/genai';
 import axios from 'axios';
-import { eq } from 'drizzle-orm';
+// import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 
@@ -54,8 +54,8 @@ export const ai = new GoogleGenAI({
 export async function POST(req) {
     const { courseId, ...formData } = await req.json();
     const user = await currentUser();
-    const { has } = await auth();
-    const hasPremiumAccess = has({ plan: 'starter' })
+    // const { has } = await auth();
+    // const hasPremiumAccess = has({ plan: 'starter' })
     const config = {
         thinkingConfig: {
             thinkingBudget: -1,
@@ -74,14 +74,14 @@ export async function POST(req) {
     ];
 
     // If User already created course 
-    if (!hasPremiumAccess) {
-        const result = await db.select().from(coursesTable)
-            .where(eq(coursesTable.userEmail, user?.primaryEmailAddress?.emailAddress));
+    // if (!hasPremiumAccess) {
+    //     const result = await db.select().from(coursesTable)
+    //         .where(eq(coursesTable.userEmail, user?.primaryEmailAddress?.emailAddress));
 
-        if (result?.length >= 5) {
-            return NextResponse.json({ 'resp': 'Limit Exceeded' })
-        }
-    }
+    //     if (result?.length >= 5) {
+    //         return NextResponse.json({ 'resp': 'Limit Exceeded' })
+    //     }
+    // }
 
     const response = await ai.models.generateContent({
         model,
